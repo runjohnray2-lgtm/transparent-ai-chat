@@ -45,6 +45,7 @@ export default function Home() {
 
   const model = MODELS.find(m => m.id === modelId)!
   const activeKeyForModel = keys[model.provider]
+  const hasAnyKey = Object.values(keys).some(k => k.trim().length > 0)
 
   const liveEstimate = useMemo(() => {
     const inputTokens = estimateTokens(input)
@@ -161,6 +162,17 @@ export default function Home() {
           ⚙️ API Keys
         </button>
       </header>
+
+      {/* Prominent, unmissable demo-mode banner — no digging into settings required */}
+      {!hasAnyKey && (
+        <button
+          onClick={() => setShowSettings(true)}
+          className="w-full text-left bg-amber-500/10 border-b border-amber-600/40 px-6 py-2.5 text-sm text-amber-300 hover:bg-amber-500/20 transition-colors"
+        >
+          🧪 <strong>Demo mode</strong> — no API keys saved, so every reply below is a clearly-labeled
+          simulation, not a real model response. Click here to add your own key and go live.
+        </button>
+      )}
 
       <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full px-6 py-6 gap-4">
         {/* Settings panel — bring-your-own keys, browser-only storage */}
