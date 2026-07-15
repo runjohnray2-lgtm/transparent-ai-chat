@@ -150,9 +150,12 @@ export default function Home() {
       <header className="border-b border-neutral-800 px-6 py-4 flex items-start justify-between">
         <div>
           <h1 className="text-xl font-bold">🔍 Transparent AI Chat</h1>
-          <p className="text-sm text-neutral-500 mt-1">
-            See the real cost of every message — before and after you send it. Nothing is spent
-            until you explicitly approve it.
+          <p className="text-sm font-semibold text-emerald-400 mt-1">
+            See every cost. Approve every action.
+          </p>
+          <p className="text-sm text-neutral-500 mt-0.5">
+            The real cost of every message — before and after you send it. Nothing is spent until
+            you explicitly approve it.
           </p>
         </div>
         <button
@@ -232,8 +235,9 @@ export default function Home() {
         <div className="flex-1 space-y-3 overflow-y-auto min-h-[200px]">
           {turns.length === 0 && (
             <p className="text-sm text-neutral-600 text-center mt-12">
-              Type a message, click &quot;Review Cost&quot; to lock in an estimate, then approve it
-              to actually send. Nothing is spent in between.
+              Send your first message — every cost will be shown upfront. Click &quot;Review
+              Cost&quot; to lock in an estimate, then approve it to actually send. Nothing is spent
+              in between.
             </p>
           )}
           {turns.map((t, i) => (
@@ -273,12 +277,15 @@ export default function Home() {
         {lockedEstimate && (
           <div className="bg-amber-950/20 border-2 border-amber-700/50 rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-amber-400">
-              ⏸️ Review before sending — nothing has been spent yet
+              ⏸️ Approve this request?
             </div>
             <p className="text-sm text-neutral-300 bg-neutral-900/60 rounded-lg p-2 max-h-24 overflow-y-auto">
               {pendingMessage}
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+              <span>
+                Model: <span className="text-neutral-300">{model.label}</span>
+              </span>
               <span>
                 Input: <span className="text-neutral-300">~{lockedEstimate.inputTokens} tokens</span>
               </span>
@@ -295,6 +302,7 @@ export default function Home() {
                 </span>
               </span>
             </div>
+            <p className="text-xs text-neutral-500">Nothing has been spent yet.</p>
             <div className="flex gap-2 pt-1">
               <button
                 onClick={approveAndSend}
@@ -352,7 +360,7 @@ export default function Home() {
               }
             }}
             disabled={pendingMessage !== null}
-            placeholder="Type a message… (Enter to review cost, Shift+Enter for new line)"
+            placeholder="Type anything… (Enter to review cost, Shift+Enter for new line)"
             className="flex-1 bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2 text-sm resize-none h-20 disabled:opacity-50"
           />
           <button
