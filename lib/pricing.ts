@@ -39,6 +39,15 @@ export const MODELS: ModelPricing[] = [
     contextWindow: 200_000,
   },
   {
+    id: "gpt-4o",
+    label: "GPT-4o",
+    provider: "OpenAI",
+    inputPerMTok: 2.5,
+    outputPerMTok: 10.0,
+    contextWindow: 128_000,
+    notes: "Verify current rate at openai.com/api/pricing — rates and model lineup change frequently",
+  },
+  {
     id: "gemini-3.5-flash",
     label: "Gemini 3.5 Flash",
     provider: "Google",
